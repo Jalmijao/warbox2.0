@@ -54,6 +54,47 @@ Este projeto será desenvolvido utilizando Spec Driven Development e terá foco 
 * Observabilidade
 * Testes automatizados
 
+## 🏗️ Arquitetura de Infraestrutura
+
+A infraestrutura é desacoplada através de interfaces, permitindo múltiplas implementações:
+
+### Storage (Video Files)
+- **Local Development**: MinIO (S3-compatible) via Docker
+- **AWS Production**: Amazon S3
+- **Abstração**: `StorageService` interface (implementações: `MinIOStorageService`, `S3StorageService`)
+
+### Banco de Dados
+- **Local Development**: PostgreSQL via Docker
+- **AWS Production**: Amazon RDS PostgreSQL
+- **Abstração**: JPA/Hibernate (banco-agnóstico)
+
+### Message Queue / Event Streaming
+- **Local Development**: Kafka via Docker
+- **AWS Production**: Managed Streaming for Kafka (MSK)
+- **Abstração**: `EventPublisher` interface (implementações: `KafkaEventPublisher`)
+
+### Cache
+- **Local Development**: Redis via Docker (opcional)
+- **AWS Production**: ElastiCache Redis
+- **Abstração**: Spring Cache abstraction
+
+**Benefício**: Deploy do mesmo código em local/staging/production sem mudanças de source.
+
+---
+
+## 🛠️ Stack Técnico
+
+| Componente | Versão | Propósito |
+|-----------|--------|----------|
+| **Java** | 21 LTS | Runtime, APIs REST, serviços |
+| **Spring Boot** | 3.x | Framework web, dependency injection, abstrações |
+| **PostgreSQL** | 15+ | Banco de dados relacional |
+| **MinIO** | latest | Storage S3-compatible (local) |
+| **Kafka** | latest | Message Broker, event streaming |
+| **Maven** | 3.9+ | Build tool, dependency management |
+| **Docker** | latest | Containerização de infra local |
+| **Docker Compose** | - | Orquestração de containers locais |
+
 ---
 
 ## 📂 Estrutura
