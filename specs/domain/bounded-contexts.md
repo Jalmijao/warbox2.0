@@ -23,7 +23,7 @@ O sistema Warbox 2.0 é dividido em múltiplos contextos (microserviços lógico
 ### Invariantes
 - Email deve ser único
 - Apenas um email por usuário
-- Senha debe ser segura
+- Senha deve ser segura
 - Apenas admins pode gerenciar outros usuários
 
 ### Eventos Produzidos
